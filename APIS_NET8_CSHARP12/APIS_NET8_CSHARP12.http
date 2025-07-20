@@ -1,0 +1,6 @@
+@APIS_NET8_CSHARP12_HostAddress = http://localhost:5138
+
+GET {{APIS_NET8_CSHARP12_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
