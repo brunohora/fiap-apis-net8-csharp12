@@ -11,3 +11,6 @@ Novas funcionalidades como: AllowedValues, DeniedValues, Base64String, Range com
 
 ### JSON
 Disparar uma exceção na desserialização quando: propriedades obrigatórias não forem recebidas, ou proriedades além das esperadas forem recebidas. Uma outra funcionalidade é a possibilidade de definir uma policy no momento da serialização (camelCase,  PascalCase, snake_case ou  kebab-case), sem precisar atribuir manualmente em cada propriedade da classe serializada.
+
+### Dependency Injection
+Suporte para keyed services, que permite registrar serviços com uma chave específica e resolvê-los posteriormente usando essa chave. Útil para cenários onde é necessário utilizar múltiplas implementações do mesmo serviço.
