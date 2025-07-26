@@ -6,31 +6,14 @@ namespace APIS_NET8_CSHARP12.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InjecaoDependenciaController : ControllerBase
+    public class InjecaoDependenciaController(
+        [FromKeyedServices("SingletonUm")] IInjecaoDependencia injecaoSingletonUmCtor,
+        [FromKeyedServices("SingletonDois")] IInjecaoDependencia injecaoSingletonDoisCtor,
+        [FromKeyedServices("ScopedUm")] IInjecaoDependencia injecaoScopedUmCtor,
+        [FromKeyedServices("ScopedDois")] IInjecaoDependencia injecaoScopedDoisCtor,
+        [FromKeyedServices("TransientUm")] IInjecaoDependencia injecaoTransientUmCtor,
+        [FromKeyedServices("TransientDois")] IInjecaoDependencia injecaoTransientDoisCtor) : ControllerBase
     {
-        private readonly IInjecaoDependencia _injecaoSingletonUm;
-        private readonly IInjecaoDependencia _injecaoSingletonDois;
-        private readonly IInjecaoDependencia _injecaoScopedUm;
-        private readonly IInjecaoDependencia _injecaoScopedDois;
-        private readonly IInjecaoDependencia _injecaoTransientUm;
-        private readonly IInjecaoDependencia _injecaoTransientDois;
-
-        public InjecaoDependenciaController(
-            [FromKeyedServices("SingletonUm")] IInjecaoDependencia injecaoSingletonUm,
-            [FromKeyedServices("SingletonDois")]IInjecaoDependencia injecaoSingletonDois,
-            [FromKeyedServices("ScopedUm")]IInjecaoDependencia injecaoScopedUm,
-            [FromKeyedServices("ScopedDois")]IInjecaoDependencia injecaoScopedDois,
-            [FromKeyedServices("TransientUm")]IInjecaoDependencia injecaoTransientUm,
-            [FromKeyedServices("TransientDois")] IInjecaoDependencia injecaoTransientDois)
-        {
-            _injecaoSingletonUm = injecaoSingletonUm;
-            _injecaoSingletonDois = injecaoSingletonDois;
-            _injecaoScopedUm = injecaoScopedUm;
-            _injecaoScopedDois = injecaoScopedDois;
-            _injecaoTransientUm = injecaoTransientUm;
-            _injecaoTransientDois = injecaoTransientDois;
-        }
-
         /// <summary>
         /// Retorna um objeto que permite comparar a partir dos Ids, a injeção de dependencia de dois keyed services, onde cada um deles contém duas instâncias, uma recebida pelo construtor da controller e a outra por parâmetro do método.
         /// </summary>
@@ -52,11 +35,11 @@ namespace APIS_NET8_CSHARP12.Controllers
             {
                 new ComparacaoInstancia(
                     key: "SingletonUm",
-                    idInstanciaConstrutor: _injecaoSingletonUm.IdInstancia,
+                    idInstanciaConstrutor: injecaoSingletonUmCtor.IdInstancia,
                     idInstanciaParametro: injecaoSingletonUm.IdInstancia),
                 new ComparacaoInstancia(
                     key: "SingletonDois",
-                    idInstanciaConstrutor: _injecaoSingletonDois.IdInstancia,
+                    idInstanciaConstrutor: injecaoSingletonDoisCtor.IdInstancia,
                     idInstanciaParametro: injecaoSingletonDois.IdInstancia)
             };
 
@@ -84,11 +67,11 @@ namespace APIS_NET8_CSHARP12.Controllers
             {
                 new ComparacaoInstancia(
                     key: "ScopedUm",
-                    idInstanciaConstrutor: _injecaoScopedUm.IdInstancia,
+                    idInstanciaConstrutor: injecaoScopedUmCtor.IdInstancia,
                     idInstanciaParametro: injecaoScopedUm.IdInstancia),
                 new ComparacaoInstancia(
                     key: "ScopedDois",
-                    idInstanciaConstrutor: _injecaoScopedDois.IdInstancia,
+                    idInstanciaConstrutor: injecaoScopedDoisCtor.IdInstancia,
                     idInstanciaParametro: injecaoScopedDois.IdInstancia)
             };
 
@@ -116,11 +99,11 @@ namespace APIS_NET8_CSHARP12.Controllers
             {
                 new ComparacaoInstancia(
                     key: "TransientUm",
-                    idInstanciaConstrutor: _injecaoTransientUm.IdInstancia,
+                    idInstanciaConstrutor: injecaoTransientUmCtor.IdInstancia,
                     idInstanciaParametro: injecaoTransientUm.IdInstancia),
                 new ComparacaoInstancia(
                     key: "TransientDois",
-                    idInstanciaConstrutor: _injecaoTransientDois.IdInstancia,
+                    idInstanciaConstrutor: injecaoTransientDoisCtor.IdInstancia,
                     idInstanciaParametro: injecaoTransientDois.IdInstancia)
             };
 
