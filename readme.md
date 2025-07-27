@@ -78,3 +78,8 @@ public class InjecaoDependenciaController(
         [FromKeyedServices("Singleton")] IInjecaoDependencia injecaoSingleton
 ) : ControllerBase { ... }
 ```
+
+## Referência
+
+ - [Native AOT - Microsoft](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/?tabs=windows%2Cnet8)
+ - [What's new in .NET 8](https://learn.microsoft.com/pt-br/dotnet/core/whats-new/dotnet-8/overview)
