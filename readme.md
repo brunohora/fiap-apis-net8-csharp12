@@ -1,12 +1,16 @@
 
 # APIs com .NET 8 e C# 12   
+<details>
+<summary>Compilador AOT (ahead-of-time)</summary>
+<br/>
 
-Novidades
-
-### Compilador AOT (ahead-of-time)
 Em alternativa ao JIT (just-in-time), permite pré compilar apps para que não sejam executados no servidor em tempo de execução, permitindo execução em ambientes sem .NET instalado. Inicialização mais rápida, menor consumo de memória, porém maior consumo de disco. Benefícios para cargas de trabalho com muitas instâncias.  
+</details>
 
-### Data Annotations
+<details>
+<summary>Data Annotations</summary>
+<br/>
+
 Novas funcionalidades como: AllowedValues, DeniedValues, Base64String, Range com mínimo e máximo exclusivo e Length com mínimo/máximo. Exemplo:
 ```csharp
 public class Arquivo
@@ -36,7 +40,12 @@ public class Pessoa
 }
 ```
 
-### JSON
+</details>
+
+<details>
+<summary>JSON</summary>
+<br/>
+
 Disparar uma exceção na desserialização quando: propriedades obrigatórias não forem recebidas, ou proriedades além das esperadas forem recebidas. Uma outra funcionalidade é a possibilidade de definir uma policy no momento da serialização (camelCase,  PascalCase, snake_case ou  kebab-case), sem precisar atribuir manualmente em cada propriedade da classe serializada. Exemplo:
 ```csharp
 [JsonUnmappedMemberHandling(JsonUnmappedMemberHandling.Disallow)]
@@ -60,9 +69,24 @@ public IActionResult GetKebabLower()
     return Ok(jsonSerializadoComPolicy);
 }
 ```
+</details>
 
-### Dependency Injection
-Suporte para keyed services, que permite registrar serviços com uma chave específica e resolvê-los posteriormente usando essa chave. Útil para cenários onde é necessário utilizar múltiplas implementações do mesmo serviço. Exemplo:
+<details>
+<summary>Dependency Injection</summary>
+<br/>
+
+Suporte para injeção de dependência sem recebê-la diretamente no construtor ou parâmetro, solicitando diretamente para um Service Provider.
+```csharp
+[HttpGet("transient")]
+public IActionResult GetTransient(IServiceProvider serviceProvider)
+{
+    var injecaoTransient = serviceProvider.GetRequiredService<IInjecaoDependencia>();
+    ...
+    return Ok();
+}
+```
+
+Keyed Services, que permitem registrar serviços com uma chave específica e resolvê-los posteriormente usando essa chave. Útil para cenários onde é necessário utilizar múltiplas implementações do mesmo serviço. Exemplo:
 ```csharp
 void ConfigureKeyedDI(IServiceCollection services)
 {
@@ -71,13 +95,20 @@ void ConfigureKeyedDI(IServiceCollection services)
 }
 ```
 
-### Primary Constructors
+</details>
+
+<details>
+<summary>Primary Constructors</summary>
+<br/>
+
 Construtores primários permitem definir propriedades diretamente na declaração da classe, simplificando a sintaxe. Versátil por permitir uma variedade de aplicações, como por exemplo se combinado com record, structs, data annotations e construtores de controllers com injeção de dependência. Exemplo:
 ```csharp
 public class InjecaoDependenciaController(
         [FromKeyedServices("Singleton")] IInjecaoDependencia injecaoSingleton
 ) : ControllerBase { ... }
 ```
+
+</details>
 
 ## Referência
 

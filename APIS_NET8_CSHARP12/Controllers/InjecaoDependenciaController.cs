@@ -79,7 +79,7 @@ namespace APIS_NET8_CSHARP12.Controllers
         }
 
         /// <summary>
-        /// Retorna um objeto que permite comparar a partir dos Ids, a injeção de dependencia de dois keyed services, onde cada um deles contém duas instâncias, uma recebida pelo construtor da controller e a outra por parâmetro do método.
+        /// Retorna um objeto que permite comparar a partir dos Ids, a injeção de dependencia de dois keyed services, onde cada um deles contém duas instâncias, uma recebida pelo construtor da controller e a outra utilizando Service Provider.
         /// </summary>
         /// <returns></returns>
         /// <param name="comparacao"></param>
@@ -89,12 +89,13 @@ namespace APIS_NET8_CSHARP12.Controllers
         ///     GET /api/json/transient
         ///     
         /// </remarks>
-        /// <response code="200">O objeto com duas diferentes injeções transient realizadas para cada chave, uma recebida no construtor e outra por parâmetro.</response>
+        /// <response code="200">O objeto com duas diferentes injeções transient realizadas para cada chave, uma recebida no construtor e outra usando Service Provider.</response>
         [HttpGet("transient")]
-        public IActionResult GetTransient(
-            [FromKeyedServices("TransientUm")] IInjecaoDependencia injecaoTransientUm,
-            [FromKeyedServices("TransientDois")] IInjecaoDependencia injecaoTransientDois)
+        public IActionResult GetTransient(IServiceProvider serviceProvider)
         {
+            var injecaoTransientUm = serviceProvider.GetRequiredKeyedService<IInjecaoDependencia>("TransientUm");
+            var injecaoTransientDois = serviceProvider.GetRequiredKeyedService<IInjecaoDependencia>("TransientDois");
+
             var comparacao = new List<ComparacaoInstancia>
             {
                 new ComparacaoInstancia(
