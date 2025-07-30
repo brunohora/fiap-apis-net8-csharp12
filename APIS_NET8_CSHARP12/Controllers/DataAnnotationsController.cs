@@ -1,4 +1,4 @@
-﻿using APIS_NET8_CSHARP12.Models.DataAnnotations;
+﻿using APIS_NET8_CSHARP12_Shared.Models.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIS_NET8_CSHARP12.Controllers

@@ -1,4 +1,4 @@
-﻿namespace APIS_NET8_CSHARP12.Models.PrimaryConstructor
+﻿namespace APIS_NET8_CSHARP12_Shared.Models.PrimaryConstructor
 {
     public class Aluno(string nome, string email)
     {

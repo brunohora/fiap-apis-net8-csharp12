@@ -15,4 +15,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\APIS_NET8_CSHARP12_IoC\APIS_NET8_CSHARP12_IoC.csproj" />
+    <ProjectReference Include="..\APIS_NET8_CSHARP12_MODELS\APIS_NET8_CSHARP12_Shared.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace APIS_NET8_CSHARP12.Models.Json
+namespace APIS_NET8_CSHARP12_Shared.Models.Json
 {
     [JsonUnmappedMemberHandling(JsonUnmappedMemberHandling.Disallow)]
     public class MapeamentoPropriedades

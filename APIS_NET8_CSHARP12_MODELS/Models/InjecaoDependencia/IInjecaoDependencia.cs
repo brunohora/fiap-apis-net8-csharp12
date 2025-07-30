@@ -1,4 +1,4 @@
-﻿namespace APIS_NET8_CSHARP12.Models.InjecaoDependencia
+﻿namespace APIS_NET8_CSHARP12_Shared.Models.InjecaoDependencia
 {
     public interface IInjecaoDependencia
     {

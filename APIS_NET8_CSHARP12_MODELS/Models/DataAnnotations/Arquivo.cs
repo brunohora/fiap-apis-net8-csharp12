@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace APIS_NET8_CSHARP12.Models.DataAnnotations
+namespace APIS_NET8_CSHARP12_Shared.Models.DataAnnotations
 {
     public class Arquivo
     {

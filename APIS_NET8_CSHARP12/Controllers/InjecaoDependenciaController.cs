@@ -1,4 +1,4 @@
-﻿using APIS_NET8_CSHARP12.Models.InjecaoDependencia;
+﻿using APIS_NET8_CSHARP12_Shared.Models.InjecaoDependencia;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

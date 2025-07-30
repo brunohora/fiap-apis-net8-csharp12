@@ -1,5 +1,4 @@
-﻿using APIS_NET8_CSHARP12.Models.Json;
-using Microsoft.AspNetCore.Http;
+﻿using APIS_NET8_CSHARP12_Shared.Models.Json;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Serialization;

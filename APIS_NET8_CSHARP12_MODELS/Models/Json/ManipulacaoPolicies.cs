@@ -1,4 +1,4 @@
-﻿namespace APIS_NET8_CSHARP12.Models.Json
+﻿namespace APIS_NET8_CSHARP12_Shared.Models.Json
 {
     public class ManipulacaoPolicies
     {

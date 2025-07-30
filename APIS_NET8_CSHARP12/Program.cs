@@ -1,10 +1,9 @@
-using APIS_NET8_CSHARP12.Models.InjecaoDependencia;
+using APIS_NET8_CSHARP12_IoC.Configurations;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -20,9 +19,7 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(xmlPath);
 });
 
-// ConfigureDefaultDI(builder.Services);
-
-ConfigureKeyedDI(builder.Services);
+builder.Services.ConfigureServices();
 
 var app = builder.Build();
 
@@ -40,22 +37,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-void ConfigureDefaultDI(IServiceCollection services)
-{
-    services.AddSingleton<IInjecaoDependencia, InjecaoDependencia>();
-    services.AddScoped<IInjecaoDependencia, InjecaoDependencia>();
-    services.AddTransient<IInjecaoDependencia, InjecaoDependencia>();
-}
-
-void ConfigureKeyedDI(IServiceCollection services)
-{
-    services.AddKeyedSingleton<IInjecaoDependencia, InjecaoDependencia>("SingletonUm");
-    services.AddKeyedSingleton<IInjecaoDependencia, InjecaoDependencia>("SingletonDois");
-
-    services.AddKeyedScoped<IInjecaoDependencia, InjecaoDependencia>("ScopedUm");
-    services.AddKeyedScoped<IInjecaoDependencia, InjecaoDependencia>("ScopedDois");
-
-    services.AddKeyedTransient<IInjecaoDependencia, InjecaoDependencia>("TransientUm");
-    services.AddKeyedTransient<IInjecaoDependencia, InjecaoDependencia>("TransientDois");
-}
