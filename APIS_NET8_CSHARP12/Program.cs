@@ -24,30 +24,32 @@ builder.Services.ConfigureServices();
 
 var app = builder.Build();
 
-app.UseExceptionHandler(errorApp =>
-{
-    errorApp.Run(async context =>
-    {
-        context.Response.StatusCode = 500;
-        context.Response.ContentType = "application/json";
+app.ConfigureMiddlewares();
 
-        var exceptionFeature = context.Features.Get<IExceptionHandlerPathFeature>();
-        var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+//app.UseExceptionHandler(errorApp =>
+//{
+//    errorApp.Run(async context =>
+//    {
+//        context.Response.StatusCode = 500;
+//        context.Response.ContentType = "application/json";
 
-        if (exceptionFeature?.Error != null)
-        {
-            logger.LogError(exceptionFeature.Error, exceptionFeature.Path);
-        }
+//        var exceptionFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+//        var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
 
-        var errorResponse = new
-        {
-            OriginalExceptionMessage = exceptionFeature?.Error?.Message,
-            NewMessage = "Ops! Ocorreu um erro interno, mas os detalhes do erro foram capturados. Vamos trabalhar para resolvê-lo o mais rápido possível."
-        };
+//        if (exceptionFeature?.Error != null)
+//        {
+//            logger.LogError(exceptionFeature.Error, exceptionFeature.Path);
+//        }
 
-        await context.Response.WriteAsJsonAsync(errorResponse);
-    });
-});
+//        var errorResponse = new
+//        {
+//            OriginalExceptionMessage = exceptionFeature?.Error?.Message,
+//            NewMessage = "Ops! Ocorreu um erro interno, mas os detalhes do erro foram capturados. Vamos trabalhar para resolvê-lo o mais rápido possível."
+//        };
+
+//        await context.Response.WriteAsJsonAsync(errorResponse);
+//    });
+//});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -110,7 +110,16 @@ public class InjecaoDependenciaController(
 
 </details>
 
+<details>
+<summary>Middlewares</summary>
+<br/>
+
+Utilização de middleware em linha e customizado, para adicionar configurações que serão executadas no pipeline (sequencialmente) de cada solicitação. O middleware pode realizar uma configuração e invocar o próximo middleware ou finalizar a solicitação, impedindo que todos os próximos sejam invocados (short-circuit). Permite reduzir dependências e modularizar configurações da aplicação.
+
+</details>
+
 ## Referência
 
  - [Native AOT - Microsoft](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/?tabs=windows%2Cnet8)
  - [What's new in .NET 8](https://learn.microsoft.com/pt-br/dotnet/core/whats-new/dotnet-8/overview)
+ - [Middlewares](https://learn.microsoft.com/pt-br/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0)
