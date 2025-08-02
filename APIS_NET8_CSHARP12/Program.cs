@@ -1,4 +1,5 @@
-using APIS_NET8_CSHARP12_IoC.Configurations;
+﻿using APIS_NET8_CSHARP12_IoC.Configurations;
+using Microsoft.AspNetCore.Diagnostics;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,31 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.ConfigureServices();
 
 var app = builder.Build();
+
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+
+        var exceptionFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+        var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+
+        if (exceptionFeature?.Error != null)
+        {
+            logger.LogError(exceptionFeature.Error, exceptionFeature.Path);
+        }
+
+        var errorResponse = new
+        {
+            OriginalExceptionMessage = exceptionFeature?.Error?.Message,
+            NewMessage = "Ops! Ocorreu um erro interno, mas os detalhes do erro foram capturados. Vamos trabalhar para resolvê-lo o mais rápido possível."
+        };
+
+        await context.Response.WriteAsJsonAsync(errorResponse);
+    });
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
